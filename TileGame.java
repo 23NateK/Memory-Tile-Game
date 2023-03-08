@@ -1,5 +1,6 @@
 import javax.swing.*;  
 import java.awt.event.*;
+import java.awt.*;
 import java.util.Arrays;
 public class TileGame{
     public static void Example() {  
@@ -23,10 +24,8 @@ public class TileGame{
             }
         }
     for(int r=0;r<round;r++){
-        int x=(int) Math.round(Math.random()*5);
-        int y=(int) Math.round(Math.random()*6);
-        System.out.println(x);
-        System.out.println(y);
+        int x=(int) Math.round(Math.random()*4);
+        int y=(int) Math.round(Math.random()*5);
         board[x][y]=r;
     }
 
@@ -48,7 +47,7 @@ public class TileGame{
 
 
         f.setSize(1000,500); 
-        f.setLayout(null); 
+        f.setLayout(new GridLayout(3,4));
         f.setVisible(true);
     }
 
