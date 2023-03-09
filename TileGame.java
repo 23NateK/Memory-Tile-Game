@@ -15,28 +15,50 @@ public class TileGame{
         f.setLayout(null);//using no layout managers  
         f.setVisible(true);//making the frame visible  
     } 
-    public static void Game(){
+    public static JFrame Game(JFrame f){
         int round=4;
+        int correctNum=1;
         int[][] board=new int[5][6];
         for(int x=0;x<board.length;x++){
             for(int y=0;y<board[0].length;y++){
                 board[x][y]=0;
             }
         }
-    for(int r=0;r<round;r++){
+    for(int r=1;r<=round;r++){
         int x=(int) Math.round(Math.random()*4);
         int y=(int) Math.round(Math.random()*5);
+        while(board[x][y]!=0){
+            x=(int) Math.round(Math.random()*4);
+            y=(int) Math.round(Math.random()*5);
+        }
         board[x][y]=r;
     }
-
-        System.out.println(Arrays.deepToString(board));
+    round++;
+    for(int x=0;x<board.length;x++){
+        for(int y=0;y<board[0].length;y++){
+            if(board[x][y]==0){
+                
+                JButton a=new JButton("");
+                a.setBackground(Color.GRAY);
+                f.add(a);
+            }else{
+                JButton a=new JButton(Integer.toString(board[x][y]));
+                a.setBackground(Color.WHITE);
+                f.add(a);
+            }
+        }
+    }
+    System.out.println(Arrays.deepToString(board));
+    return f;
     }
     public static void Window() {
         JFrame f=new JFrame("Tile Game");
         JButton start=new JButton("Start");
         start.addActionListener(new ActionListener() { 
             public void actionPerformed(ActionEvent e) { 
-                Game();
+                JFrame f2=Game(f);
+                f2.remove(start);
+                f2.setVisible(true);
             } 
         });
         start.setBounds(0,0,100,50);
@@ -47,11 +69,12 @@ public class TileGame{
 
 
         f.setSize(1000,500); 
-        f.setLayout(new GridLayout(3,4));
+        f.setLayout(new GridLayout(5,6));
         f.setVisible(true);
     }
 
     public static void main(String[] args) {
         Window();
+       
     }
 }
