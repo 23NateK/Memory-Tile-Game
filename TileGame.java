@@ -1,7 +1,6 @@
 import javax.swing.*;  
 import java.awt.event.*;
 import java.awt.*;
-import java.util.Arrays;
 public class TileGame{
     public static void Example() {  
         JFrame f=new JFrame();//creating instance of JFrame  
