@@ -15,9 +15,10 @@ public class TileGame{
         f.setLayout(null);//using no layout managers  
         f.setVisible(true);//making the frame visible  
     } 
+    public static int correctNum=1;
+    public static JFrame f2;
     public static JFrame Game(JFrame f){
         int round=4;
-        int correctNum=1;
         int[][] board=new int[5][6];
         for(int x=0;x<board.length;x++){
             for(int y=0;y<board[0].length;y++){
@@ -34,6 +35,7 @@ public class TileGame{
         board[x][y]=r;
     }
     round++;
+    
     for(int x=0;x<board.length;x++){
         for(int y=0;y<board[0].length;y++){
             if(board[x][y]==0){
@@ -45,10 +47,16 @@ public class TileGame{
                 JButton a=new JButton(Integer.toString(board[x][y]));
                 a.setBackground(Color.WHITE);
                 f.add(a);
+                a.addActionListener(new ActionListener() { 
+                    public void actionPerformed(ActionEvent e) { 
+                        check(a);
+
+            } 
+        });
             }
         }
+    
     }
-    System.out.println(Arrays.deepToString(board));
     return f;
     }
     public static void Window() {
@@ -56,7 +64,7 @@ public class TileGame{
         JButton start=new JButton("Start");
         start.addActionListener(new ActionListener() { 
             public void actionPerformed(ActionEvent e) { 
-                JFrame f2=Game(f);
+                f2=Game(f);
                 f2.remove(start);
                 f2.setVisible(true);
             } 
@@ -71,6 +79,31 @@ public class TileGame{
         f.setSize(1000,500); 
         f.setLayout(new GridLayout(5,6));
         f.setVisible(true);
+    }
+    public static void check(JButton a){
+        if(a.getText().equals(Integer.toString(correctNum))){
+            correctNum++;
+        }else if(!a.getText().equals(Integer.toString(correctNum))){
+            f2.setVisible(false);
+            JFrame f3=new JFrame("Tile Game");
+            JLabel failed=new JLabel("Failed");
+            failed.setHorizontalAlignment(JLabel.CENTER);
+            failed.setVerticalAlignment(JLabel.CENTER);
+            JButton restart=new JButton("Restart?");
+            restart.setBounds(0,0,100,50);
+            restart.addActionListener(new ActionListener() { 
+                public void actionPerformed(ActionEvent e) { 
+                    Window();
+                    correctNum=1;
+                    f3.setVisible(false);
+                } 
+            });
+            f3.add(restart);
+            f3.setSize(1000,500); 
+            f3.add(failed);
+            f3.setVisible(true);
+            
+        }
     }
 
     public static void main(String[] args) {
