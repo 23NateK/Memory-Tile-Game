@@ -2,22 +2,10 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 public class TileGame{
-    public static void Example() {  
-        JFrame f=new JFrame();//creating instance of JFrame  
-                
-        JButton b=new JButton("click");//creating instance of JButton  
-        b.setBounds(130,100,100, 40);//x axis, y axis, width, height  
-                
-        f.add(b);//adding button in JFrame  
-                
-        f.setSize(400,500);//400 width and 500 height  
-        f.setLayout(null);//using no layout managers  
-        f.setVisible(true);//making the frame visible  
-    } 
     public static int correctNum=1;
     public static JFrame f2;
+    public static int round=4;
     public static JFrame Game(JFrame f){
-        int round=4;
         int[][] board=new int[5][6];
         for(int x=0;x<board.length;x++){
             for(int y=0;y<board[0].length;y++){
@@ -82,6 +70,16 @@ public class TileGame{
     public static void check(JButton a){
         if(a.getText().equals(Integer.toString(correctNum))){
             correctNum++;
+            if(a.getText().equals(Integer.toString(round))){
+                JFrame f4=new JFrame("Tile Game");
+                f4=Game(f4);
+                f4.setVisible(true);
+                f3.setVisible(true);
+                f4.setSize(1000,500); 
+                f4.setLayout(new GridLayout(5,6));
+                f4.setVisible(true);
+
+            }
         }else if(!a.getText().equals(Integer.toString(correctNum))){
             f2.setVisible(false);
             JFrame f3=new JFrame("Tile Game");
