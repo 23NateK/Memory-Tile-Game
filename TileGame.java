@@ -3,7 +3,10 @@ import java.awt.event.*;
 import java.awt.*;
 public class TileGame{
     public static int correctNum=1;
+    public static JFrame f;
     public static JFrame f2;
+    public static JFrame f3;
+    public static JFrame f4;
     public static int round=4;
     public static JFrame Game(JFrame f){
         int[][] board=new int[5][6];
@@ -47,7 +50,7 @@ public class TileGame{
     return f;
     }
     public static void Window() {
-        JFrame f=new JFrame("Tile Game");
+        f=new JFrame("Tile Game");
         JButton start=new JButton("Start");
         start.addActionListener(new ActionListener() { 
             public void actionPerformed(ActionEvent e) { 
@@ -70,14 +73,16 @@ public class TileGame{
     public static void check(JButton a){
         if(a.getText().equals(Integer.toString(correctNum))){
             correctNum++;
-            if(a.getText().equals(Integer.toString(round))){
-                JFrame f4=new JFrame("Tile Game");
+            if(correctNum==round){
+                f4=new JFrame("Tile Game");
                 f4=Game(f4);
-                f4.setVisible(true);
-                f3.setVisible(true);
+                f.setVisible(false);
+                f2.setVisible(false);
+                f4.setVisible(false);
                 f4.setSize(1000,500); 
                 f4.setLayout(new GridLayout(5,6));
                 f4.setVisible(true);
+                correctNum=1;
 
             }
         }else if(!a.getText().equals(Integer.toString(correctNum))){
@@ -93,6 +98,7 @@ public class TileGame{
                     Window();
                     correctNum=1;
                     f3.setVisible(false);
+                    round=4;
                 } 
             });
             f3.add(restart);
