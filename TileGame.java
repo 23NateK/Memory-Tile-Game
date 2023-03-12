@@ -54,9 +54,9 @@ public class TileGame{
         JButton start=new JButton("Start");
         start.addActionListener(new ActionListener() { 
             public void actionPerformed(ActionEvent e) { 
-                f2=Game(f);
-                f2.remove(start);
-                f2.setVisible(true);
+                f=Game(f);
+                f.remove(start);
+                f.setVisible(true);
             } 
         });
         start.setBounds(0,0,100,50);
@@ -75,18 +75,18 @@ public class TileGame{
             correctNum++;
             if(correctNum==round){
                 f4=new JFrame("Tile Game");
-                f4=Game(f4);
                 f.setVisible(false);
-                f2.setVisible(false);
                 f4.setVisible(false);
                 f4.setSize(1000,500); 
                 f4.setLayout(new GridLayout(5,6));
                 f4.setVisible(true);
+                f=Game(f4);
+                f.setVisible(true);
                 correctNum=1;
 
             }
         }else if(!a.getText().equals(Integer.toString(correctNum))){
-            f2.setVisible(false);
+            f.setVisible(false);
             JFrame f3=new JFrame("Tile Game");
             JLabel failed=new JLabel("Failed");
             failed.setHorizontalAlignment(JLabel.CENTER);
