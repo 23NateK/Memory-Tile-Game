@@ -8,8 +8,10 @@ public class TileGame{
     public static JFrame f3;
     public static JFrame f4;
     public static int round=4;
+    public static int[][] board;
+    public static int numClicked=0;
     public static JFrame Game(JFrame f){
-        int[][] board=new int[5][6];
+        board=new int[5][6];
         for(int x=0;x<board.length;x++){
             for(int y=0;y<board[0].length;y++){
                 board[x][y]=0;
@@ -37,6 +39,16 @@ public class TileGame{
                 JButton a=new JButton(Integer.toString(board[x][y]));
                 a.setBackground(Color.WHITE);
                 f.add(a);
+                if(a.getText().equals("1")){
+                    a.addActionListener(new ActionListener() { 
+                        public void actionPerformed(ActionEvent e) { 
+                            check(a);
+                            buttonClearer(board);
+    
+                } 
+            });
+
+                }else{
                 a.addActionListener(new ActionListener() { 
                     public void actionPerformed(ActionEvent e) { 
                         check(a);
@@ -44,6 +56,7 @@ public class TileGame{
             } 
         });
             }
+        }
         }
     
     }
@@ -107,6 +120,36 @@ public class TileGame{
             f3.setVisible(true);
             
         }
+    }
+    public static void buttonClearer(int[][] board){
+        JFrame f5=new JFrame("Tile Game");
+        for(int x=0;x<board.length;x++){
+            for(int y=0;y<board[0].length;y++){
+                if(board[x][y]==0){
+                    
+                    JButton a=new JButton("");
+                    a.setBackground(Color.GRAY);
+                    f5.add(a);
+                }else{
+                    JButton a=new JButton("");
+                    a.setBackground(Color.WHITE);
+                    f5.add(a);
+                    a.addActionListener(new ActionListener() { 
+                        public void actionPerformed(ActionEvent e) { 
+                            check(a);
+    
+                } 
+            });
+                }
+            }
+        
+        }
+        f5.setSize(1000,500);
+        f5.setLayout(new GridLayout(5,6));
+        f5.setVisible(true);
+        f.setVisible(false);
+        f3.setVisible(false);
+        f4.setVisible(false);
     }
 
     public static void main(String[] args) {
