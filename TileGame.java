@@ -7,9 +7,9 @@ public class TileGame{
     public static JFrame f2;
     public static JFrame f3;
     public static JFrame f4;
+    public static JFrame f5;
     public static int round=4;
     public static int[][] board;
-    public static int numClicked=0;
     public static JFrame Game(JFrame f){
         board=new int[5][6];
         for(int x=0;x<board.length;x++){
@@ -27,7 +27,6 @@ public class TileGame{
         board[x][y]=r;
     }
     round++;
-    
     for(int x=0;x<board.length;x++){
         for(int y=0;y<board[0].length;y++){
             if(board[x][y]==0){
@@ -100,6 +99,7 @@ public class TileGame{
             }
         }else if(!a.getText().equals(Integer.toString(correctNum))){
             f.setVisible(false);
+            f5.setVisible(false);
             JFrame f3=new JFrame("Tile Game");
             JLabel failed=new JLabel("Failed");
             failed.setHorizontalAlignment(JLabel.CENTER);
@@ -122,7 +122,7 @@ public class TileGame{
         }
     }
     public static void buttonClearer(int[][] board){
-        JFrame f5=new JFrame("Tile Game");
+        f5=new JFrame("Tile Game");
         for(int x=0;x<board.length;x++){
             for(int y=0;y<board[0].length;y++){
                 if(board[x][y]==0){
@@ -148,8 +148,6 @@ public class TileGame{
         f5.setLayout(new GridLayout(5,6));
         f5.setVisible(true);
         f.setVisible(false);
-        f3.setVisible(false);
-        f4.setVisible(false);
     }
 
     public static void main(String[] args) {
