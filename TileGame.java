@@ -4,13 +4,10 @@ import java.awt.*;
 public class TileGame{
     public static int correctNum=1;
     public static JFrame f;
-    public static JFrame f2;
-    public static JFrame f3;
-    public static JFrame f4;
-    public static JFrame f5;
+    public static JPanel p;
     public static int round=4;
     public static int[][] board;
-    public static JFrame Game(JFrame f){
+    public static JFrame Game(JPanel p){
         board=new int[5][6];
         for(int x=0;x<board.length;x++){
             for(int y=0;y<board[0].length;y++){
@@ -33,11 +30,11 @@ public class TileGame{
                 
                 JButton a=new JButton("");
                 a.setBackground(Color.GRAY);
-                f.add(a);
+                p.add(a);
             }else{
                 JButton a=new JButton(Integer.toString(board[x][y]));
                 a.setBackground(Color.WHITE);
-                f.add(a);
+                p.add(a);
                 if(a.getText().equals("1")){
                     a.addActionListener(new ActionListener() { 
                         public void actionPerformed(ActionEvent e) { 
@@ -63,16 +60,19 @@ public class TileGame{
     }
     public static void Window() {
         f=new JFrame("Tile Game");
+        p=new JPanel();
+        p.setSize(1000, 500);
+        f.add(p);
         JButton start=new JButton("Start");
         start.addActionListener(new ActionListener() { 
             public void actionPerformed(ActionEvent e) { 
-                f=Game(f);
-                f.remove(start);
+                Game(p);
+                p.remove(start);
                 f.setVisible(true);
             } 
         });
         start.setBounds(0,0,100,50);
-        f.add(start);
+        p.add(start);
 
 
 
@@ -86,21 +86,16 @@ public class TileGame{
         if(a.getText().equals(Integer.toString(correctNum))){
             correctNum++;
             if(correctNum==round){
-                f4=new JFrame("Tile Game");
-                f.setVisible(false);
-                f4.setVisible(false);
-                f4.setSize(1000,500); 
-                f4.setLayout(new GridLayout(5,6));
-                f4.setVisible(true);
-                f=Game(f4);
-                f.setVisible(true);
+                p.setVisible(false);
+                p.setSize(1000,500); 
+                p.setLayout(new GridLayout(5,6));
+                p.setVisible(true);
+                Game(p);
                 correctNum=1;
 
             }
         }else if(!a.getText().equals(Integer.toString(correctNum))){
-            f.setVisible(false);
-            f5.setVisible(false);
-            JFrame f3=new JFrame("Tile Game");
+            p.setVisible(false);
             JLabel failed=new JLabel("Failed");
             failed.setHorizontalAlignment(JLabel.CENTER);
             failed.setVerticalAlignment(JLabel.CENTER);
@@ -110,30 +105,29 @@ public class TileGame{
                 public void actionPerformed(ActionEvent e) { 
                     Window();
                     correctNum=1;
-                    f3.setVisible(false);
+                    p.setVisible(false);
                     round=4;
                 } 
             });
-            f3.add(restart);
-            f3.setSize(1000,500); 
-            f3.add(failed);
-            f3.setVisible(true);
+            p.add(restart);
+            p.setSize(1000,500); 
+            p.add(failed);
+            p.setVisible(true);
             
         }
     }
     public static void buttonClearer(int[][] board){
-        f5=new JFrame("Tile Game");
         for(int x=0;x<board.length;x++){
             for(int y=0;y<board[0].length;y++){
                 if(board[x][y]==0){
                     
                     JButton a=new JButton("");
                     a.setBackground(Color.GRAY);
-                    f5.add(a);
+                    p.add(a);
                 }else{
                     JButton a=new JButton("");
                     a.setBackground(Color.WHITE);
-                    f5.add(a);
+                    p.add(a);
                     a.addActionListener(new ActionListener() { 
                         public void actionPerformed(ActionEvent e) { 
                             check(a);
@@ -144,10 +138,9 @@ public class TileGame{
             }
         
         }
-        f5.setSize(1000,500);
-        f5.setLayout(new GridLayout(5,6));
-        f5.setVisible(true);
-        f.setVisible(false);
+        f.setSize(1000,500);
+        p.setLayout(new GridLayout(5,6));
+        p.setVisible(true);
     }
 
     public static void main(String[] args) {
