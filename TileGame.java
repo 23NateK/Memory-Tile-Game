@@ -7,7 +7,9 @@ public class TileGame{
     public static JPanel p;
     public static int round=4;
     public static int[][] board;
-    public static JFrame Game(JPanel p){
+    public static void Game(JPanel p){
+        p.setVisible(false);
+        p.validate();
         board=new int[5][6];
         for(int x=0;x<board.length;x++){
             for(int y=0;y<board[0].length;y++){
@@ -56,19 +58,19 @@ public class TileGame{
         }
     
     }
-    return f;
+    p.setVisible(true);
     }
     public static void Window() {
         f=new JFrame("Tile Game");
         p=new JPanel();
         p.setSize(1000, 500);
+        f.setSize(1000, 500);
         f.add(p);
         JButton start=new JButton("Start");
         start.addActionListener(new ActionListener() { 
             public void actionPerformed(ActionEvent e) { 
                 Game(p);
                 p.remove(start);
-                f.setVisible(true);
             } 
         });
         start.setBounds(0,0,100,50);
@@ -78,8 +80,7 @@ public class TileGame{
 
 
 
-        f.setSize(1000,500); 
-        f.setLayout(new GridLayout(5,6));
+        p.setLayout(new GridLayout(5,6));
         f.setVisible(true);
     }
     public static void check(JButton a){
@@ -87,6 +88,8 @@ public class TileGame{
             correctNum++;
             if(correctNum==round){
                 p.setVisible(false);
+                p.removeAll();
+                p.validate();
                 p.setSize(1000,500); 
                 p.setLayout(new GridLayout(5,6));
                 p.setVisible(true);
@@ -96,6 +99,8 @@ public class TileGame{
             }
         }else if(!a.getText().equals(Integer.toString(correctNum))){
             p.setVisible(false);
+            p.removeAll();
+            p.validate();
             JLabel failed=new JLabel("Failed");
             failed.setHorizontalAlignment(JLabel.CENTER);
             failed.setVerticalAlignment(JLabel.CENTER);
@@ -103,9 +108,9 @@ public class TileGame{
             restart.setBounds(0,0,100,50);
             restart.addActionListener(new ActionListener() { 
                 public void actionPerformed(ActionEvent e) { 
+                    f.setVisible(false);
                     Window();
                     correctNum=1;
-                    p.setVisible(false);
                     round=4;
                 } 
             });
