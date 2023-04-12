@@ -40,7 +40,7 @@ public class TileGame{
                 if(a.getText().equals("1")){
                     a.addActionListener(new ActionListener() { 
                         public void actionPerformed(ActionEvent e) { 
-                            check(a);
+                            check(Integer.parseInt(a.getText()));
                             buttonClearer(board);
     
                 } 
@@ -49,7 +49,7 @@ public class TileGame{
                 }else{
                 a.addActionListener(new ActionListener() { 
                     public void actionPerformed(ActionEvent e) { 
-                        check(a);
+                        check(Integer.parseInt(a.getText()));
 
             } 
         });
@@ -83,8 +83,8 @@ public class TileGame{
         p.setLayout(new GridLayout(5,6));
         f.setVisible(true);
     }
-    public static void check(JButton a){
-        if(a.getText().equals(Integer.toString(correctNum))){
+    public static void check(int num){
+        if(num==correctNum){
             correctNum++;
             if(correctNum==round){
                 p.setVisible(false);
@@ -97,7 +97,7 @@ public class TileGame{
                 correctNum=1;
 
             }
-        }else if(!a.getText().equals(Integer.toString(correctNum))){
+        }else if(num!=correctNum){
             p.setVisible(false);
             p.removeAll();
             p.validate();
@@ -114,14 +114,17 @@ public class TileGame{
                     round=4;
                 } 
             });
-            p.add(restart);
             p.setSize(1000,500); 
             p.add(failed);
+            p.add(restart);
             p.setVisible(true);
             
         }
     }
     public static void buttonClearer(int[][] board){
+        p.setVisible(false);
+        p.removeAll();
+        p.validate();
         for(int x=0;x<board.length;x++){
             for(int y=0;y<board[0].length;y++){
                 if(board[x][y]==0){
@@ -135,7 +138,7 @@ public class TileGame{
                     p.add(a);
                     a.addActionListener(new ActionListener() { 
                         public void actionPerformed(ActionEvent e) { 
-                            check(a);
+                            check(buttonLocate(a));
     
                 } 
             });
@@ -144,10 +147,29 @@ public class TileGame{
         
         }
         f.setSize(1000,500);
+        p.setSize(1000,500);
         p.setLayout(new GridLayout(5,6));
         p.setVisible(true);
     }
 
+    public static int buttonLocate(JButton a){
+        int x=-1;
+        int y=-1;
+        int bx=a.getX();
+        int by=a.getY();
+        if(bx==0){x=0;}else if(bx==164){x=1;}else if(bx==328){x=2;}else if(bx==492){x=3;}else if(bx==656){x=4;}else if(bx==820){x=5;}
+        if(by==0){y=0;}else if(by==92){y=1;}else if(by==184){y=2;}else if(by==276){y=3;}else if(by==368){y=4;}
+        int value=board[x][y];
+        return value;
+    }
+    // 0  164 328 492 656 820
+    // 1   2   3   4   5   6
+    //0
+    //92
+    //184
+    //276
+    //368
+    
     public static void main(String[] args) {
         Window();
        
