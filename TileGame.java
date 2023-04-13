@@ -127,7 +127,7 @@ public class TileGame{
         p.validate();
         for(int x=0;x<board.length;x++){
             for(int y=0;y<board[0].length;y++){
-                if(board[x][y]==0){
+                if(board[x][y]==0||board[x][y]==1){
                     
                     JButton a=new JButton("");
                     a.setBackground(Color.GRAY);
@@ -138,6 +138,7 @@ public class TileGame{
                     p.add(a);
                     a.addActionListener(new ActionListener() { 
                         public void actionPerformed(ActionEvent e) { 
+                            a.setBackground(Color.GRAY);
                             check(buttonLocate(a));
     
                 } 
