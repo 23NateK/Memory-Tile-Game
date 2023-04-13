@@ -159,16 +159,10 @@ public class TileGame{
         int by=a.getY();
         if(bx==0){x=0;}else if(bx==164){x=1;}else if(bx==328){x=2;}else if(bx==492){x=3;}else if(bx==656){x=4;}else if(bx==820){x=5;}
         if(by==0){y=0;}else if(by==92){y=1;}else if(by==184){y=2;}else if(by==276){y=3;}else if(by==368){y=4;}
-        int value=board[x][y];
+        int value=board[y][x];
         return value;
     }
-    // 0  164 328 492 656 820
-    // 1   2   3   4   5   6
-    //0
-    //92
-    //184
-    //276
-    //368
+
     
     public static void main(String[] args) {
         Window();
